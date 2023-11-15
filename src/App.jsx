@@ -12,7 +12,9 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Index />}/>
-        <Route path='/Login' element={<Index />}/>
+        {/* <Route path='/Login' element={<Index />}/>
+        <Route path='/Cadastro' element={<Index />}/>
+        <Route path='/Exame' element={<Index />}/> */}
       </Routes>
     </Router>
   )

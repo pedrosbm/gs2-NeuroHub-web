@@ -14,3 +14,26 @@
 .fs2 img{
     width: 20rem;
 }
+
+.secondSection  h2{
+    text-align: center;
+    font-size: 3rem;
+}
+
+.secondSection  img{
+    width: 20vw;
+}
+
+.secondSection  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10rem;
+    background-color: rgb(201, 238, 255);
+}
+
+.quote  {
+    text-align: justify;
+    width: 40rem;
+}

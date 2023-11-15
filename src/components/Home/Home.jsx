@@ -1,4 +1,5 @@
 import stockUser from '../../assets/stockUser.jpg'
+import caduceus from '../../assets/caduceus.png'
 
 import './Home.css'
 
@@ -14,6 +15,16 @@ export default function Home() {
 
                     <div className="fs2">
                         <img src={stockUser} />
+                    </div>
+                </div>
+
+                <div className='secondSection'>
+                    <h2>ODS 2</h2>
+                    <img src={caduceus} alt="" />
+                    <h3>Surgimos em apoio á ODS 2 no combate as doenças mentais degenerativas.</h3><br />
+                    <div className='quote'>
+                        <i>"A Future Engineers visa enfrentar de frente a significativa problemática dos retornos de pacientes com seus resultados de exames, implementando uma solução inovadora e eficiente. Nosso objetivo central é oferecer aos pacientes a possibilidade de enviar seus exames diretamente pela plataforma, simplificando o processo e eliminando as barreiras que frequentemente levam a atrasos ou até mesmo a ausências nas consultas médicas."
+                        </i>
                     </div>
                 </div>
             </section>
