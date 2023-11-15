@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import UserExams from './components/userExams/userExams'
 import Index from './pages/Index'
 import LoginPage from './pages/LoginPage'
+import CadastroPage from './pages/CadastroPage'
 
 import './reset.css'
 
@@ -14,7 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Index />}/>
         <Route path='/Login' element={<LoginPage />}/>
-        <Route path='/Cadastro' element={<Index />}/>
+        <Route path='/Cadastro' element={<CadastroPage/>}/>
         <Route path='/Exame' element={<Index />}/>
       </Routes>
     </Router>

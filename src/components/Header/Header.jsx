@@ -9,8 +9,10 @@ export default function Header() {
     return (
         <>
             <section className="header">
-                <img src={logo} className="Logo" />
-                <h1>Neuro Hub</h1>
+                <Link className='Logo' to='/'>
+                    <img src={logo} />
+                    <h1>Neuro Hub</h1>
+                </Link>
                 <Link to='/Login' className='login'>
                         <img src={userIcon} />
                         <p>Sua conta</p>

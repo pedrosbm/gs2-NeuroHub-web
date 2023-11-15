@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Link } from "react-router-dom";
 
+import './Form.css'
+
 export default function Login() {
 
     const request = async (patient) => {
@@ -48,11 +50,17 @@ export default function Login() {
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit}>
 
-                    <label htmlFor="">Email:</label><br />
-                    <input name='email' type="text" onChange={handleChange} /><br />
-
-                    <label htmlFor="">Senha:</label><br />
-                    <input name='password' type="password" onChange={handleChange} /><br />
+                    <div className="form">
+                        <div className="inputBox">
+                            <label htmlFor="">Email:</label><br />
+                            <input name='email' required placeholder="Exemplo@dominio.com" type="text" onChange={handleChange} /><br />
+                        </div>
+                        
+                        <div className="inputBox">
+                            <label htmlFor="">Senha:</label><br />
+                            <input name='password' required placeholder="***********" type="password" onChange={handleChange} /><br />
+                        </div>
+                    </div>
 
                     <button type="submit" className="button">Logar</button>
                 </form>
