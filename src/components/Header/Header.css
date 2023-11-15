@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    padding: 1.5rem;
+    background-color: aliceblue;
+    border-bottom: 1px dashed rgb(113, 113, 113);
+}
+
+.Logo   {
+    width: 5rem;
+    margin-right: 1rem;
+    border-radius: 100%;
+}

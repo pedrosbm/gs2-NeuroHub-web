@@ -1,0 +1,16 @@
+.firstSection{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10rem;
+
+}
+
+.fs1    {
+    width: 30rem;
+    font-size: 1.5rem;
+}
+
+.fs2 img{
+    width: 20rem;
+}
