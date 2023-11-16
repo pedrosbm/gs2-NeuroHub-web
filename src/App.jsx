@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import UserExams from './components/userExams/userExams'
+// import UserExams from './components/userExams/userExams'
 import Index from './pages/Index'
 import LoginPage from './pages/LoginPage'
 import CadastroPage from './pages/CadastroPage'

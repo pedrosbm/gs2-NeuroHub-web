@@ -56,6 +56,7 @@ export default function Login() {
                             <input name='email' required placeholder="Exemplo@dominio.com" type="text" onChange={handleChange} /><br />
                         </div>
                         
+                        <img src=""  alt="foto de bike" />
                         <div className="inputBox">
                             <label htmlFor="">Senha:</label><br />
                             <input name='password' required placeholder="***********" type="password" onChange={handleChange} /><br />
