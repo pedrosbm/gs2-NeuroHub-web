@@ -6,8 +6,10 @@ import '../Login/Form.css'
 export default function Cadastro() {
 
     const request = async (patient) => {
+        console.log(JSON.stringify(patient))
         try {
             const response = await fetch('https://api-medico-wbg2ngsbaq-uc.a.run.app/patient/', {
+                mode: "no-cors",
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,6 +42,13 @@ export default function Cadastro() {
         setPatient({ ...patient, [e.target.name]: e.target.value })
     }
 
+    const handleDateChange = e => {
+        const data = e.target.value.split("-")
+        const objectDate = new Date(data[0], data[1] - 1, data[2], 0, 0, 0, 0)
+        const date = objectDate.toISOString().replace("Z", "")
+        setPatient({ ...patient, [e.target.name]: date})
+    }
+
     const [patient, setPatient] = useState({});
 
     return (
@@ -53,7 +62,7 @@ export default function Cadastro() {
                             <label htmlFor="name">Nome:</label><br />
                             <input name='name' required placeholder="Exemplo" type="text" onChange={handleChange} /><br />
                         </div>
-                        
+
                         <div className="inputBox">
                             <label htmlFor="email">Email:</label><br />
                             <input name='email' required placeholder="Exemplo@dominio.com" type="text" onChange={handleChange} /><br />
@@ -63,7 +72,7 @@ export default function Cadastro() {
                             <label htmlFor="phone">Telefone:</label><br />
                             <input name='phone' required placeholder="11 00000-0000" type="text" onChange={handleChange} /><br />
                         </div>
-                        
+
                         <div className="inputBox">
                             <label htmlFor="document">CPF:</label><br />
                             <input name='document' required placeholder="000.000.000-00" type="text" onChange={handleChange} /><br />
@@ -91,7 +100,7 @@ export default function Cadastro() {
 
                         <div className="inputBox">
                             <label htmlFor="birthday">Data de nascimento:</label><br />
-                            <input name='birthday' required placeholder="R.Exemplo" type="date" onChange={handleChange} /><br />
+                            <input name='birthday' required placeholder="R.Exemplo" type="date" onChange={handleDateChange} /><br />
                         </div>
 
                         <div className="inputBox">

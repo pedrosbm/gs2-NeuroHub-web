@@ -15,27 +15,26 @@ export default function Login() {
                 body: JSON.stringify(patient),
             });
 
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data);
-            } else {
-                console.error('Erro na requisição:', response.status, response.statusText);
-                throw new Error('Erro na requisição.');
+            const data = await response.json();
+            console.log(data);
+            if (data["message"] == 'Email ou senha invalida') {
+                document.getElementById('error').innerHTML = "Usuário ou senha inválidos."
             }
+
         } catch (error) {
             console.error('Erro ao logar:', error);
         }
     };
-    
+
     const handleSubmit = async e => {
         e.preventDefault();
         try {
             await request(patient)
-        } catch(error){
+        } catch (error) {
             console.log("Erro ao logar - ", error)
         }
     }
-    
+
     const handleChange = e => {
         setPatient({ ...patient, [e.target.name]: e.target.value })
     }
@@ -55,12 +54,12 @@ export default function Login() {
                             <label htmlFor="">Email:</label><br />
                             <input name='email' required placeholder="Exemplo@dominio.com" type="text" onChange={handleChange} /><br />
                         </div>
-                        
-                        <img src=""  alt="foto de bike" />
+
                         <div className="inputBox">
                             <label htmlFor="">Senha:</label><br />
                             <input name='password' required placeholder="***********" type="password" onChange={handleChange} /><br />
                         </div>
+                        <span id="error"></span>
                     </div>
 
                     <button type="submit" className="button">Logar</button>

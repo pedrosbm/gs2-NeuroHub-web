@@ -39,3 +39,8 @@
     color: white;
     border: 3px solid #38B6FF;
 }
+
+#error  {
+    color: red;
+    font-weight: 600;
+}

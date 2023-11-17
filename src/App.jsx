@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Index from './pages/Index'
 import LoginPage from './pages/LoginPage'
 import CadastroPage from './pages/CadastroPage'
+import Exams from './pages/ExamsPage'
 
 import './reset.css'
 
@@ -16,7 +17,7 @@ function App() {
         <Route path='/' element={<Index />}/>
         <Route path='/Login' element={<LoginPage />}/>
         <Route path='/Cadastro' element={<CadastroPage/>}/>
-        <Route path='/Exame' element={<Index />}/>
+        <Route path='/Exame' element={<Exams />}/>
       </Routes>
     </Router>
   )
