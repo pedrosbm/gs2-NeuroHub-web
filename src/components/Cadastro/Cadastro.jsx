@@ -8,7 +8,7 @@ export default function Cadastro() {
     const request = async (patient) => {
         console.log(JSON.stringify(patient))
         try {
-            const response = await fetch('https://api-medico-wbg2ngsbaq-uc.a.run.app/patient/', {
+            const response = await fetch('https://api-medico-wbg2ngsbaq-uc.a.run.app/patient', {
                 mode: "no-cors",
                 method: 'POST',
                 headers: {
