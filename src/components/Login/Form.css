@@ -5,8 +5,9 @@
     padding: 10rem;
 }
 
-.inputBox   input{
+.inputBox   input, select{
     width: 25rem;
+    height: 3rem;
     padding-inline: 20px;
     border-radius: 100px;
 }

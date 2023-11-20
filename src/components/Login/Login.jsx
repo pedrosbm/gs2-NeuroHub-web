@@ -18,7 +18,7 @@ export default function Login() {
             const data = await response.json();
             console.log(data);
             if (data["message"] == 'Email ou senha invalida') {
-                document.getElementById('error').innerHTML = "Usuário ou senha inválidos."
+                document.getElementById('error').innerHTML = "Email ou senha inválidos."
             }
 
         } catch (error) {
