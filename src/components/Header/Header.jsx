@@ -13,9 +13,10 @@ export default function Header() {
                     <img src={logo} />
                     <h1>Neuro Hub</h1>
                 </Link>
-                <Link to='/Login' className='login'>
-                        <img src={userIcon} />
-                        <p>Sua conta</p>
+
+                <Link to='/Conta' className='login'>
+                    <img src={userIcon} />
+                    <p>Sua conta</p>
                 </Link>
             </section>
         </>

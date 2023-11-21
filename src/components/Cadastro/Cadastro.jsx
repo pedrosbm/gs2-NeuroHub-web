@@ -5,48 +5,80 @@ import '../Login/Form.css'
 
 export default function Cadastro() {
 
-    const request = async (patient) => {
-        console.log(JSON.stringify(patient))
-        // try {
-        //     const response = await fetch('https://api-medico-wbg2ngsbaq-uc.a.run.app/patient', {
-        //         mode: "no-cors",
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify(patient),
-        //     });
+    const request = async (user) => {
+        if (user["tipo"] == "paciente") {
+            try {
+                const response = await fetch('http://localhost:5001/Paciente/New', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(user),
+                });
 
-        //     if (response.ok) {
-        //         const data = await response.json();
-        //         console.log(data);
-        //     } else {
-        //         console.error('Erro na requisição:', response.status, response.statusText);
-        //         throw new Error('Erro na requisição.');
-        //     }
-        // } catch (error) {
-        //     console.error('Erro ao logar:', error);
-        // }
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem("id", data["id"])
+                    localStorage.setItem("tipo", "paciente")
+                    localStorage.setItem("logado", "true")
+                    navigate("/Conta")
+
+                } else {
+                    console.error('Erro na requisição:', response.status, response.statusText);
+                    throw new Error('Erro na requisição.');
+                }
+            } catch (error) {
+                console.error('Erro ao cadastrar:', error);
+            }
+        } else {
+            try {
+                const response = await fetch('http://localhost:5001/Medico/New', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(user),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem("id", data["id"])
+                    localStorage.setItem("tipo", "medico")
+                    localStorage.setItem("logado", "true")
+                    navigate("/Conta")
+
+                } else {
+                    console.error('Erro na requisição:', response.status, response.statusText);
+                    throw new Error('Erro na requisição.');
+                }
+            } catch (error) {
+                console.error('Erro ao cadastrar:', error);
+            }
+        }
     };
 
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await request(patient)
+            await request(user)
         } catch (error) {
             console.log("Erro ao logar - ", error)
         }
     }
 
     const handleChange = e => {
-        setPatient({ ...patient, [e.target.name]: e.target.value })
+        setUser({ ...user, [e.target.name]: e.target.value })
     }
 
-    const handleDateChange = e => {
-
+    const handleDateChange = (e) => {
+        const date = e.target.value.split("-")
+        const ano = date[0]
+        const mes = date[1]
+        const dia = date[2]
+        setUser({ ...user, [e.target.name]: `${dia}/${mes}/${ano}` })
     }
 
-    const [patient, setPatient] = useState({});
+    const [user, setUser] = useState({});
 
     return (
         <>
@@ -78,7 +110,8 @@ export default function Cadastro() {
                         <div className="inputBox">
                             <label htmlFor="type">Sou um:</label><br />
                             <select onChange={handleChange} type='text' name="tipo">
-                                <option value="paciente" selected>Paciente</option>
+                                <option selected>Escolher</option>
+                                <option value="paciente" >Paciente</option>
                                 <option value="medico">Médico</option>
                             </select>
                         </div>

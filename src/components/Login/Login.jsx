@@ -1,47 +1,77 @@
 import { useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import './Form.css'
 
 export default function Login() {
 
-    const request = async (patient) => {
-        try {
-            const response = await fetch('https://api-medico-wbg2ngsbaq-uc.a.run.app/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(patient),
-            });
+    const navigate = useNavigate()
 
-            const data = await response.json();
-            console.log(data);
-            if (data["message"] == 'Email ou senha invalida') {
-                document.getElementById('error').innerHTML = "Email ou senha inválidos."
+    const request = async (user) => {
+        if (user["tipo"] == "paciente") {
+            try {
+                const response = await fetch('http://localhost:5001/Auth/Paciente', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(user),
+                });
+
+                const data = await response.json();
+                if (data["id"] == 0) {
+                    document.getElementById('error').innerHTML = "Email ou senha inválidos."
+                } else {
+                    localStorage.setItem("id", data["id"])
+                    localStorage.setItem("tipo", "paciente")
+                    localStorage.setItem("logado", "true")
+                    navigate("/Conta")
+                }
+
+
+            } catch (error) {
+                console.error('Erro ao logar:', error);
             }
+        } else {
+            try {
+                const response = await fetch('http://localhost:5001/Auth/Medico', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(user),
+                });
+                const data = await response.json();
 
-        } catch (error) {
-            console.error('Erro ao logar:', error);
+                if (data["id"] == 0) {
+                    document.getElementById('error').innerHTML = "Email ou senha inválidos."
+                } else {
+                    localStorage.setItem("id", data["id"])
+                    localStorage.setItem("tipo", "medico")
+                    localStorage.setItem("logado", "true")
+                    navigate("/Conta")
+                }
+
+            } catch (error) {
+                console.error('Erro ao logar:', error);
+            }
         }
     };
 
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await request(patient)
+            await request(user)
         } catch (error) {
             console.log("Erro ao logar - ", error)
         }
     }
 
     const handleChange = e => {
-        setPatient({ ...patient, [e.target.name]: e.target.value })
+        setUser({ ...user, [e.target.name]: e.target.value })
     }
 
-    const [patient, setPatient] = useState({
-        type: "patient"
-    });
+    const [user, setUser] = useState({});
 
     return (
         <>
@@ -51,14 +81,24 @@ export default function Login() {
 
                     <div className="form">
                         <div className="inputBox">
-                            <label htmlFor="">Email:</label><br />
+                            <label htmlFor="email">Email:</label><br />
                             <input name='email' required placeholder="Exemplo@dominio.com" type="text" onChange={handleChange} /><br />
                         </div>
 
                         <div className="inputBox">
-                            <label htmlFor="">Senha:</label><br />
-                            <input name='password' required placeholder="***********" type="password" onChange={handleChange} /><br />
+                            <label htmlFor="senha">Senha:</label><br />
+                            <input name='senha' required placeholder="***********" type="password" onChange={handleChange} /><br />
                         </div>
+
+                        <div className="inputBox">
+                            <label htmlFor="type">Sou um:</label><br />
+                            <select onChange={handleChange} type='text' name="tipo">
+                                <option selected>Escolher</option>
+                                <option value="paciente" >Paciente</option>
+                                <option value="medico">Médico</option>
+                            </select>
+                        </div>
+
                         <span id="error"></span>
                     </div>
 
