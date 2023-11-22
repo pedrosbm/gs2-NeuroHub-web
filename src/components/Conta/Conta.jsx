@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import './Conta.css'
 
@@ -16,7 +16,7 @@ export default function conta() {
         })
     }, [])
 
-    const logout = e =>{
+    const logout = e => {
         localStorage.clear()
         localStorage.setItem("logado", "false")
         navigate("/")
@@ -27,13 +27,14 @@ export default function conta() {
     return (
         <>
             <section className="conta">
-                <h3>Dados da conta:</h3>
+                <Link className='newchat' to='/Chat'>Envie seus exames</Link>
+                <h2>Dados da conta:</h2>
                 <ul className="contaDados">
-                    <li>{user["nome"]}</li>
+                    <li>Nome - {user["nome"]}</li>
                     <hr />
-                    <li>{user["email"]}</li>
+                    <li>Email - {user["email"]}</li>
                     <hr />
-                    <li>{user["dtNasc"]}</li>
+                    <li>Data de nascimento - {user["dtNasc"]}</li>
                 </ul>
                 <button onClick={logout} className="logout">Sair</button>
             </section>

@@ -2,10 +2,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: black;
+    color: white;
     padding: 10rem;
 }
 
 .newchat    {
+    transition: 0.2s;
     margin: 3rem;
     display: flex;
     position: fixed;
@@ -14,8 +17,16 @@
     padding-inline: 5rem;
     padding-block: 1rem;
     font-size: 25px;
-    background-color: cornflowerblue;
+    background-color: #B87003;
     color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    border: 3px solid #B87003;
+}
+
+.newchat:hover    {
+    background-color: transparent;
+    color: #B87003;
     text-decoration: none;
     border-radius: 50px;
 }
@@ -44,7 +55,8 @@
     justify-content: center;
     align-items: center;
     padding: 10rem;
-    background-color: rgb(201, 238, 255);
+    background-color: #0e0603;
+    color: white;
 }
 
 .quote  {

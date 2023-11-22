@@ -1,13 +1,16 @@
 import Header from "../components/Header/Header"
-import Chat from "../components/Chat/Chat"
+import { Navigate } from "react-router-dom"
+import Exams from "../components/Chat/Exams"
 
 export default function ChatPage(){
     if(localStorage.getItem("logado") == "true"){
         return(
             <>
                 <Header></Header>
-                <Chat></Chat>
+                <Exams></Exams>
             </>
         )
+    } else  {
+        return <Navigate to='/Cadastro' />
     }
 }

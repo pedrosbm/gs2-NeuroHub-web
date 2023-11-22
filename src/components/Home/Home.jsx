@@ -1,4 +1,4 @@
-import stockUser from '../../assets/stockUser.jpg'
+import lampada from '../../assets/lampada.jpg'
 import caduceus from '../../assets/caduceus.png'
 import { Link } from 'react-router-dom'
 
@@ -16,7 +16,7 @@ export default function Home() {
                     </div>
 
                     <div className="fs2">
-                        <img src={stockUser} />
+                        <img src={lampada} />
                     </div>
                 </div>
 

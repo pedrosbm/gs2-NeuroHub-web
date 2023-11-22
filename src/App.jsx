@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Index from './pages/Index'
 import LoginPage from './pages/LoginPage'
 import CadastroPage from './pages/CadastroPage'
-import Exams from './pages/ExamsPage'
 import ContaPage from './pages/ContaPage'
 import ChatPage from './pages/ChatPage'
 
@@ -19,7 +18,6 @@ function App() {
         <Route path='/' element={<Index />}/>
         <Route path='/Login' element={<LoginPage />}/>
         <Route path='/Cadastro' element={<CadastroPage/>}/>
-        <Route path='/Exame' element={<Exams />}/>
         <Route path='/Conta' element={<ContaPage/>}/>
         <Route path='/Chat' element={<ChatPage/>}/>
       </Routes>

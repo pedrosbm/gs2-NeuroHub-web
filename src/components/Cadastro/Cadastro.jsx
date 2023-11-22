@@ -1,9 +1,10 @@
 import { useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import '../Login/Form.css'
 
 export default function Cadastro() {
+    const navigate = useNavigate()
 
     const request = async (user) => {
         if (user["tipo"] == "paciente") {

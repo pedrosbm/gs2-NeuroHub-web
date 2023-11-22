@@ -1,0 +1,30 @@
+.conta  {
+    padding: 10rem;
+    width: 50rem;
+}
+
+.contaDados{
+    list-style: none;
+    margin-block: 2rem;
+}
+
+.contaDados hr  {
+    border: 1px dashed gainsboro;
+}
+
+.logout {
+    transition: 0.2s;
+    padding-inline: 5rem;
+    font-size: large;
+    background-color: red;
+    color: white;
+    border: 3px solid red;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.logout:hover {
+    transition: 0.2s;
+    background-color: rgb(255, 255, 255);
+    color: red;
+}
