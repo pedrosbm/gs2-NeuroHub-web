@@ -1,6 +1,22 @@
 .conta  {
-    padding: 10rem;
-    width: 50rem;
+    display: flex;
+    justify-content: space-around;
+    padding: 15rem;
+    padding-inline: 10rem;
+}
+
+.brain  {
+    width: 10rem;
+}
+
+.tomografia {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 2rem;
+}
+
+.tomografia div{
+    margin-left: 1rem;
 }
 
 .contaDados{

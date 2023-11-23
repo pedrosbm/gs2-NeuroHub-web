@@ -27,8 +27,15 @@
     display: flex;
 }
 
+.hide   {
+    display: none;
+}
+
 .result {
     margin-inline: 2rem;
+    border: solid 2px #B87003;
+    padding: 1rem;
+    border-radius: 1rem;
 }
 
 .box select {

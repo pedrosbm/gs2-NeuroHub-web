@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import normalImg from '../../assets/normal.jpg'
+import alzheimerImg from '../../assets/alzheimer.jpg'
+import tumorImg from '../../assets/tumor.jpg'
 import brain from '../../assets/brain.jpg'
 
 import './Chat.css'
@@ -118,6 +122,36 @@ function Exams() {
         }
     }, [resultado])
 
+    const [comunicacao, setComunicacao] = useState({
+        mensagem: null,
+        idPaciente: null,
+        idMedico: parseInt(localStorage.getItem("id"))
+    })
+
+    const handleChange = e => {
+            setComunicacao({ ...comunicacao, [e.target.name]: e.target.value })
+    }
+
+    const msg = e => {
+        e.preventDefault();
+        const instance = comunicacao
+        instance.idPaciente = parseInt(e.target.idPaciente.value)
+        
+        fetch(`http://localhost:5001/Comunicacao/New`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(instance),
+        }).then((response) => {
+            return response.json()
+        }).then((data) => {
+            console.log(data)
+        }).catch((error) => {
+            console.error(error)
+        })
+    }
+
     if (localStorage.getItem("tipo") == "paciente") {
         return (
             <div className="envioExame">
@@ -171,14 +205,24 @@ function Exams() {
                     <div key={index}>
                         <div className="exame">
                             <div>
-                                <p>Pedro Sena te enviou um exame</p><br />
-                                <img src={brain} alt="Imagem do exame" />
+                                <p>Você resebeu um exame</p><br />
+                                <img className="brain" src={index == 1 ? tumorImg : index == 2 ? alzheimerImg : index == 3 ? normalImg : brain} alt="" />
                             </div>
                             <div className="result">
                                 <p>Resultados da ia:</p><br />
                                 <p>Resultado - {exame.resultado}</p><br />
                                 <p>Acurácia - {exame.acuracia}</p><br />
                             </div>
+                            <form onSubmit={msg}>
+                                <div className="inputBox">
+                                    <div>
+                                        <input type="text" onChange={handleChange} name="mensagem" placeholder="Mensagem ao paciente" />
+                                    </div><br />
+                                    <input id="idPaciente" className="hide" name="idPaciente" type="number" value={exame.idPaciente} />
+
+                                    <button type="submit" className="button">Enviar</button>
+                                </div>
+                            </form>
                         </div>
                         <div>
                             <hr className="Examseparator" />
