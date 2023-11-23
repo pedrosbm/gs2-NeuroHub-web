@@ -21,6 +21,7 @@ export default function conta() {
             }).then((Response) => {
                 return Response.json()
             }).then((data) => {
+                console.log(data)
                 setUser(data)
             }) 
         }

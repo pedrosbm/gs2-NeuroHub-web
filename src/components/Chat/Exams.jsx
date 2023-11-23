@@ -168,15 +168,20 @@ function Exams() {
             <section className="exames">
                 <h2>Exames á verificar:</h2>
                 {exames.map((exame, index) =>
-                    <div className="exame" key={index}>
-                        <div>
-                            <p>Pedro Sena te enviou um exame</p><br />
-                            <img src={brain} alt="Imagem do exame" />
+                    <div key={index}>
+                        <div className="exame">
+                            <div>
+                                <p>Pedro Sena te enviou um exame</p><br />
+                                <img src={brain} alt="Imagem do exame" />
+                            </div>
+                            <div className="result">
+                                <p>Resultados da ia:</p><br />
+                                <p>Resultado - {exame.resultado}</p><br />
+                                <p>Acurácia - {exame.acuracia}</p><br />
+                            </div>
                         </div>
-                        <div className="result">
-                            <p>Resultados da ia:</p><br />
-                            <p>Resultado - {exame.resultado}</p><br />
-                            <p>Acurácia - {exame.acuracia}</p><br />
+                        <div>
+                            <hr className="Examseparator" />
                         </div>
                     </div>
                 )}
