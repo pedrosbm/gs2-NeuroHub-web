@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import brain from '../../assets/brain.jpg'
+
+import './Chat.css'
 
 function Exams() {
     const navigate = useNavigate();
-    const [resultado, setResultado] = useState(null);
+    const [resultado, setResultado] = useState({
+        idPaciente: parseInt(localStorage.getItem("id")),
+    });
 
     const [medicos, setMedicos] = useState([]);
+
+    const [exames, setExames] = useState([]);
 
     const [novo, setNovo] = useState({
         foto1: null,
@@ -32,6 +39,16 @@ function Exams() {
         }).catch((error) => {
             console.error(error)
         })
+
+        fetch(`http://localhost:5001/Exame/List`, {
+            method: 'GET'
+        }).then((response) => {
+            return response.json()
+        }).then((data) => {
+            setExames(data)
+        }).catch((error) => {
+            console.error(error)
+        })
     }, [])
 
     const handleSubmit = async (e) => {
@@ -51,6 +68,7 @@ function Exams() {
                 throw new Error(`Erro na requisição ${response.status}`);
             } else {
                 alert("Seus exames foram enviados e serão avaliados.")
+                navigate("/")
             }
 
             const data = await response.json();
@@ -60,8 +78,16 @@ function Exams() {
                 return;
             }
 
-            // Atualize o estado para exibir as informações na tela
-            setResultado(data);
+            // const data = {
+            //     'success': true,
+            //     'predictions': [
+            //         { 'class_name': "Alzheimer1", 'score': 1 },
+            //         { 'class_name': "Alzheimer1", 'score': 1 },
+            //         { 'class_name': "tumor", 'score': 0.6 },
+            //     ]
+            // }
+
+            setResultado({ ...resultado, data });
 
         } catch (error) {
             console.error("Erro ao enviar as imagens:", error);
@@ -69,20 +95,45 @@ function Exams() {
         }
     };
 
+    useEffect(() => {
+
+        if (resultado["data"] != undefined) {
+            const result = {
+                "resultado": resultado["data"]["predictions"][0]["class_name"],
+                "acuracia": resultado["data"]["predictions"][0]["score"],
+                "idPaciente": parseInt(localStorage.getItem("id"))
+            }
+
+            try {
+                const response = fetch('http://localhost:5001/Exame/New', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(result),
+                });
+            } catch (error) {
+                console.error('Erro ao Enviar exames:', error);
+            }
+        }
+    }, [resultado])
+
     if (localStorage.getItem("tipo") == "paciente") {
         return (
-            <div className="wrapper">
+            <div className="envioExame">
                 <form onSubmit={handleSubmit}>
-                    <section>
-                        <fieldset className="verificacao">
-                            <div className="box">
-                                <label htmlFor="">Selecione um médico:</label><br />
-                                <select type="text" name="medico">
-                                    {medicos.map((medico, index) =>
-                                        <option key={index} value={medico.id}>{medico.nome}</option>
-                                    )}
-                                </select>
-                            </div>
+                    <section className="formularioPaciente">
+                        <div className="box">
+                            <label htmlFor="">Selecione um médico:</label><br />
+                            <select type="text" name="medico">
+                                {medicos.map((medico, index) =>
+                                    <option key={index} value={medico.id}>{medico.nome}</option>
+                                )}
+                            </select>
+                        </div>
+
+                        <div className="exames">
+                            <h2>Selecione seus exames</h2>
                             <div className="box">
                                 <input
                                     type="file"
@@ -104,37 +155,33 @@ function Exams() {
                                     onChange={(e) => handleFileChange(e, "foto3")}
                                 />
                             </div>
-                            <div className="box">
-                                <label htmlFor="">Mensagem:</label>
-                                <input type="text" />
-                            </div>
-                        </fieldset>
-                        <button type="submit" className="Button">
-                            Confirmar
+                        </div>
+                        <button type="submit" className="button">
+                            Enviar exames
                         </button>
                     </section>
                 </form>
-
-                {/* Exibir as informações de resultado se disponíveis */}
-                {resultado && (
-                    <div className="result-section">
-                        <h2>Resultados</h2>
-                        {resultado.predictions.map((prediction, index) => (
-                            <div key={index} className="result-item">
-                                {/* Exibir a imagem convertida em base64 */}
-                                {/* <img src={data:image/jpeg;base64,${prediction.image}}/> */}
-                                {/* Exibir informações da previsão */}
-                                <p>Classe: {prediction.class_name}</p>
-                                <p>Precisão: {prediction.score}</p>
-                            </div>
-                        ))}
-                    </div>
-                )}
             </div>
         );
-    } else if(localStorage.getItem("tipo") == "medico"){
-        // Simulação médico
+    } else if (localStorage.getItem("tipo") == "medico") {
+        return (
+            <section className="exames">
+                <h2>Exames á verificar:</h2>
+                {exames.map((exame, index) =>
+                    <div className="exame" key={index}>
+                        <div>
+                            <p>Pedro Sena te enviou um exame</p><br />
+                            <img src={brain} alt="Imagem do exame" />
+                        </div>
+                        <div className="result">
+                            <p>Resultados da ia:</p><br />
+                            <p>Resultado - {exame.resultado}</p><br />
+                            <p>Acurácia - {exame.acuracia}</p><br />
+                        </div>
+                    </div>
+                )}
+            </section>
+        )
     }
 }
-
 export default Exams;

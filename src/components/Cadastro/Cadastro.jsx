@@ -79,7 +79,9 @@ export default function Cadastro() {
         setUser({ ...user, [e.target.name]: `${dia}/${mes}/${ano}` })
     }
 
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+        "especialidade": "neurologista"
+    });
 
     return (
         <>

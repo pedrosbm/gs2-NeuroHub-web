@@ -2,18 +2,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 17rem 10rem;
-    background-color: black;
+    background-color: rgb(255, 255, 255);
 }
 
-.inputBox   input, select{
+.inputBox   input{
     width: 25rem;
     height: 3rem;
     padding-inline: 20px;
     border-radius: 100px;
     color: white;
-    background-color: black;
+    border: 2px solid #B87003;
+}
+
+.inputBox   select{
+    width: 25rem;
+    height: 3rem;
+    padding-inline: 20px;
+    border-radius: 100px;
+    color: rgb(0, 0, 0);
     border: 2px solid #B87003;
 }
 

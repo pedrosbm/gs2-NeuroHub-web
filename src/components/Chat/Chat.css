@@ -1,0 +1,36 @@
+.formularioPaciente {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10rem;
+}
+
+.box input {
+    background-color: transparent;
+}
+
+.exames {
+    display: flex;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+    padding: 18rem 10rem;
+    background-color: rgb(255, 255, 255);
+}
+
+.exame  {
+    display: flex;
+}
+
+.result {
+    margin-inline: 2rem;
+}
+
+.box select {
+    width: 25rem;
+    height: 3rem;
+    padding-inline: 20px;
+    border-radius: 100px;
+    color: rgb(0, 0, 0);
+    border: 2px solid #B87003;
+}

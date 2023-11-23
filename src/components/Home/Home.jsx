@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <>
             <section className="home">
-                <Link className='newchat' to='/Chat'>Chat</Link>
+            <Link className='newchat' to='/Chat'>{localStorage.getItem("tipo") == "medico" ? "Conferir exames" : "Envie seus exames"}</Link>
                 <div className="firstSection">
                     <div className="fs1">
                         <h2>Bem vindo(a)</h2>

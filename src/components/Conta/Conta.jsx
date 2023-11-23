@@ -7,13 +7,23 @@ export default function conta() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch(`http://localhost:5001/Paciente/Get/${parseInt(localStorage.getItem("id"))}`, {
-            method: 'GET'
-        }).then((Response) => {
-            return Response.json()
-        }).then((data) => {
-            setUser(data)
-        })
+        if(localStorage.getItem("tipo") == "paciente"){
+            fetch(`http://localhost:5001/Paciente/Get/${parseInt(localStorage.getItem("id"))}`, {
+                method: 'GET'
+            }).then((Response) => {
+                return Response.json()
+            }).then((data) => {
+                setUser(data)
+            })
+        } else  {
+            fetch(`http://localhost:5001/Medico/Get/${parseInt(localStorage.getItem("id"))}`, {
+                method: 'GET'
+            }).then((Response) => {
+                return Response.json()
+            }).then((data) => {
+                setUser(data)
+            }) 
+        }
     }, [])
 
     const logout = e => {
@@ -27,7 +37,7 @@ export default function conta() {
     return (
         <>
             <section className="conta">
-                <Link className='newchat' to='/Chat'>Envie seus exames</Link>
+                <Link className='newchat' to='/Chat'>{localStorage.getItem("tipo") == "medico" ? "Conferir exames" : "Envie seus exames"}</Link>
                 <h2>Dados da conta:</h2>
                 <ul className="contaDados">
                     <li>Nome - {user["nome"]}</li>
