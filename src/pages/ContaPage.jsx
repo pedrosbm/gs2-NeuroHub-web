@@ -1,6 +1,7 @@
 import Header from "../components/Header/Header"
 import Conta from '../components/Conta/Conta'
 import { Navigate } from "react-router-dom"
+import Footer from "../components/Footer/Footer"
 
 export default function ContaPage() {
 
@@ -9,6 +10,7 @@ export default function ContaPage() {
             <>
                 <Header></Header>
                 <Conta></Conta>
+                <Footer></Footer>
             </>
         )
     } else  {

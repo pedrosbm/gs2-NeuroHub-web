@@ -1,0 +1,11 @@
+.footer {
+    background-color: black;
+    border-top: 1px dashed rgb(48, 48, 48);
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
+
+.footer ul{
+    list-style: none;
+}
