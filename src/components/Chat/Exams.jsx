@@ -72,7 +72,6 @@ function Exams() {
                 throw new Error(`Erro na requisição ${response.status}`);
             } else {
                 alert("Seus exames foram enviados e serão avaliados.")
-                navigate("/")
             }
 
             const data = await response.json();
@@ -85,8 +84,8 @@ function Exams() {
             // const data = {
             //     'success': true,
             //     'predictions': [
-            //         { 'class_name': "Alzheimer1", 'score': 1 },
-            //         { 'class_name': "Alzheimer1", 'score': 1 },
+            //         { 'class_name': "Tumor", 'score': 1 },
+            //         { 'class_name': "Tumor", 'score': 1 },
             //         { 'class_name': "tumor", 'score': 0.6 },
             //     ]
             // }
@@ -129,14 +128,14 @@ function Exams() {
     })
 
     const handleChange = e => {
-            setComunicacao({ ...comunicacao, [e.target.name]: e.target.value })
+        setComunicacao({ ...comunicacao, [e.target.name]: e.target.value })
     }
 
     const msg = e => {
         e.preventDefault();
         const instance = comunicacao
         instance.idPaciente = parseInt(e.target.idPaciente.value)
-        
+
         fetch(`http://localhost:5001/Comunicacao/New`, {
             method: 'POST',
             headers: {
@@ -146,6 +145,7 @@ function Exams() {
         }).then((response) => {
             return response.json()
         }).then((data) => {
+            alert("Mensagem retornada ao paciente")
             console.log(data)
         }).catch((error) => {
             console.error(error)
